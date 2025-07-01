@@ -30,6 +30,8 @@ Um sistema Laravel para gerenciamento de dívidas entre usuários credores e seu
 4. Atualize as dependências no container Docker:
 
    ```bash
+   docker-compose build
+   docker-compose up -d
    docker exec -it t-ngc-app bash -c "composer update"
    ```
 
