@@ -1,0 +1,61 @@
+services:
+    app:
+        build:
+            args:
+                user: test_user
+                uid: 1000
+            context: ./
+            dockerfile: Dockerfile
+        image: test-ngc
+        container_name: test-ngc-app
+        restart: unless-stopped
+        working_dir: /var/www/
+        volumes:
+            - ./:/var/www
+        networks:
+            - test-ngc
+        depends_on:
+            - redis
+        environment:
+            - REDIS_HOST=redis
+
+    db:
+        image: postgres:16
+        container_name: test-ngc-db
+        restart: unless-stopped
+        environment:
+            POSTGRES_USER: test_user
+            POSTGRES_PASSWORD: test_password
+            POSTGRES_DB: test_db
+        ports:
+            - 5432:5432
+        volumes:
+            - ~/Projects/test-ngc/volumes/pgsql:/var/lib/postgresql/data
+            - ~/Downloads/backups:/backup
+        networks:
+            - test-ngc
+
+    nginx:
+        image: nginx:alpine
+        container_name: test-ngc-nginx
+        restart: unless-stopped
+        ports:
+            - 8000:80
+        volumes:
+            - ./:/var/www
+            - ./docker-compose/nginx:/etc/nginx/conf.d/
+        networks:
+            - test-ngc
+
+    redis:
+        image: redis:latest
+        container_name: test-ngc-redis
+        restart: unless-stopped
+        ports:
+        - "6379:6379"
+        networks:
+            - test-ngc
+
+networks:
+    test-ngc:
+        driver: bridge
