@@ -10,7 +10,7 @@ Um sistema Laravel para gerenciamento de dívidas entre usuários credores e seu
 1. Clone o repositório e acesse o diretório do projeto:
 
    ```bash
-   git clone https://https://github.com/FerrLeonardo/T-NGC-1.git
+   git clone https://github.com/FerrLeonardo/T-NGC-1.git
    cd T-NGC-1
    ```
 
