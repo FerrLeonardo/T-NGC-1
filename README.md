@@ -32,7 +32,7 @@ Um sistema Laravel para gerenciamento de dívidas entre usuários credores e seu
    ```bash
    docker-compose build
    docker-compose up -d
-   docker exec -it t-ngc-app bash -c "composer update"
+   docker exec -it test-ngc-app bash -c "composer update"
    ```
 
 5. Acesse o sistema via navegador:
